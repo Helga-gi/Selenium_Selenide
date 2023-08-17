@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -18,12 +18,12 @@ public class CallTest {
     private WebDriver driver;
 
     @BeforeAll
-    static void setUpAll() {
+    public static void setUpAll() {
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
-    void beforeEach() {
+    void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
@@ -33,7 +33,7 @@ public class CallTest {
     }
 
     @AfterEach
-    void afterEach() {
+    void tearDown() {
         driver.quit();
         driver = null;
     }
@@ -41,7 +41,7 @@ public class CallTest {
     @Test
     void shouldTestV1() {
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Василий Васильев");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+780000000");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+78000000000");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.className("button.button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText().trim();
